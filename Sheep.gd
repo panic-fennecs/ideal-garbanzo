@@ -2,8 +2,12 @@ extends KinematicBody
 
 
 const DOG_REACTION_DISTANCE = 7
+const DOG_INFLUENCE = 2.0
+const OTHER_SHEEP_INFLUENCE = 0.8
+
 const MAX_VELOCITY = 10.0
-const DRAG = 0.05
+const DRAG = 0.02
+const EPSILON = 0.0001
 
 var velocity = Vector2()
 var main
@@ -25,17 +29,24 @@ func get_dog():
 	return main.get_node("Dog")
 
 func _physics_process(delta):
+	# flee dog
 	var dog = get_dog()
 	if dog.translation.distance_to(self.translation) < DOG_REACTION_DISTANCE:
-		flee(Vector2(dog.translation.x, dog.translation.z))
-	#var other_sheep = get_other_sheep()
-	
+		flee(Vector2(dog.translation.x, dog.translation.z), DOG_INFLUENCE)
+
+	# follow other sheep
+	var other_sheep = get_other_sheep()
+	for os in other_sheep:
+		var influence = OTHER_SHEEP_INFLUENCE / (os.translation.distance_squared_to(translation) + EPSILON)
+		var steering = os.velocity - velocity
+		velocity = velocity.linear_interpolate(velocity + steering, influence)
+
 	velocity *= 1.0 - DRAG
 
-	move_and_collide(Vector3(velocity.x, 0, velocity.y) * delta)
+	move_and_collide(Vector3(velocity.x, -translation.y, velocity.y) * delta)
 
-func flee(pos):
+func flee(pos, influence):
 	var diff = get_2d_position() - pos
-	var desired_velocity = diff.normalized() / (diff.length()+0.001) * MAX_VELOCITY 
+	var desired_velocity = diff.normalized() / (diff.length()+EPSILON) * MAX_VELOCITY 
 	var steering = desired_velocity - velocity
-	velocity += steering
+	velocity += steering * influence
