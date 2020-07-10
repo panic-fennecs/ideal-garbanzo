@@ -11,9 +11,12 @@ const EPSILON = 0.0001
 
 var velocity = Vector2()
 var main
+var move_animation = null
 
 func _ready():
 	main = get_node("/root/Main")
+	move_animation = $"MoveAnimation"
+	move_animation.set_objects($"MeshInstance", self)
 
 func get_2d_position():
 	return Vector2(self.translation.x, self.translation.z)
@@ -43,7 +46,11 @@ func _physics_process(delta):
 
 	velocity *= 1.0 - DRAG
 
-	move_and_collide(Vector3(velocity.x, -translation.y, velocity.y) * delta)
+	if velocity.length_squared() < 0.1:
+		move_animation.idle()
+	else:
+		move_animation.move(Vector3(velocity.x, -translation.y, velocity.y).normalized())
+		move_and_collide(Vector3(velocity.x, -translation.y, velocity.y) * delta)
 
 func flee(pos, influence):
 	var diff = get_2d_position() - pos
