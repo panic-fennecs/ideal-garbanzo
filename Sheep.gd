@@ -16,7 +16,7 @@ var move_animation = null
 func _ready():
 	main = get_node("/root/Main")
 	move_animation = $"MoveAnimation"
-	move_animation.set_objects($"MeshInstance", self)
+	move_animation.set_objects($"SheepModel", self)
 
 func get_2d_position():
 	return Vector2(self.translation.x, self.translation.z)
