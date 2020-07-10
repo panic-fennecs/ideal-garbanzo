@@ -11,6 +11,7 @@ var height = 0
 var velocity = 0
 var force = 10
 var gravitation = -50
+var rotation_speed = 10
 
 func _process(delta):
 	if jumping:
@@ -26,7 +27,7 @@ func _process(delta):
 	translated_object.transform.origin.y = initial_height + height
 	if target_dir:
 		var dir = -rotated_object.global_transform.basis.z
-		dir = dir.linear_interpolate(target_dir, .02)
+		dir = dir.linear_interpolate(target_dir, max(10 * delta, 0))
 		rotated_object.transform = rotated_object.transform.looking_at(rotated_object.transform.origin + dir, Vector3(0, 1, 0))
 
 func idle():

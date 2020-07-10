@@ -49,7 +49,7 @@ func _physics_process(delta):
 	if velocity.length_squared() < 0.1:
 		move_animation.idle()
 	else:
-		move_animation.move(Vector3(velocity.x, -translation.y, velocity.y).normalized())
+		move_animation.move(Vector3(velocity.x, 0, velocity.y).normalized())
 		move_and_collide(Vector3(velocity.x, -translation.y, velocity.y) * delta)
 
 func flee(pos, influence):
