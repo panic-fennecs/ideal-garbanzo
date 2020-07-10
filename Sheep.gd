@@ -2,7 +2,7 @@ extends KinematicBody
 
 
 const DOG_REACTION_DISTANCE = 7
-const DOG_INFLUENCE = 2.0
+const DOG_INFLUENCE = 2.2
 const OTHER_SHEEP_INFLUENCE = 0.8
 
 const MAX_VELOCITY = 10.0
