@@ -13,3 +13,4 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 0.826904, 0.562344, 0, -0.562344, 0.826904, 0, 13.7816, 29.5006 )
 
 [node name="Dog" parent="." instance=ExtResource( 3 )]
+[connection signal="clicked" from="Ground" to="Dog" method="_on_Ground_clicked"]
