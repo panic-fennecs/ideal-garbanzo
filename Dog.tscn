@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Dog.gd" type="Script" id=1]
-[ext_resource path="res://MoveAnimation.gd" type="Script" id=2]
+[ext_resource path="res://MoveAnimation.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -18,8 +18,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 1, 0 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
-[node name="MoveAnimation" type="Node2D" parent="."]
-script = ExtResource( 2 )
+[node name="MoveAnimation" parent="." instance=ExtResource( 2 )]
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
 
