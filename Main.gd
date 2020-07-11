@@ -9,7 +9,7 @@ func init_sheep():
 		var s = SheepScene.instance()
 		s.translate(Vector3((randf()-0.5)*20.0, 1, (randf()-0.5)*20.0))
 		add_child(s)
-		s.init(Vector2(26.0, -34), Vector2(26, -27))
+		s.init(Vector2(26.0, -34), Vector2(26, -23))
 		sheep.append(s)
 
 func _ready():

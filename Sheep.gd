@@ -15,8 +15,9 @@ const GROUP_PROPABILITY = 0.17
 const GROUP_UP_DURATION = 50
 const GROUP_FORCE = 0.07
 
-const ENTRY_REACTION_DISTANCE = 5
-const ENTRY_FINISHED_DISTANCE = 0.5
+const ENTRY_REACTION_DISTANCE = 12
+const ENTRY_FINISHED_DISTANCE = 4.0
+const ENTRY_FORCE = 0.3
 
 const MAX_VELOCITY = 20
 const DRAG = 0.05
@@ -87,6 +88,9 @@ func flee_dog():
 func follow_other_sheep():
 	var other_sheep = get_other_sheep()
 
+	if not other_sheep:
+		return
+
 	var sum_steering = Vector2()
 	var num_steerings = 0
 	for os in other_sheep:
@@ -119,16 +123,27 @@ func group_up():
 		velocity = (velocity + steering).clamped(MAX_VELOCITY)
 
 func do_enter():
+	var t_point = null
+	var force = 0
+	var position = get_2d_position()
+	var entry_distance = position.distance_to(target_entry_point)
+
 	if in_finish:
-		pass
+		t_point = target_point
+		force = 1.0
 	else:
-		var position = get_2d_position()
-		var entry_distance = position.distance_to(target_entry_point)
 		if entry_distance < ENTRY_REACTION_DISTANCE:
 			if entry_distance < ENTRY_FINISHED_DISTANCE:
 				in_finish = true
 			else:
-				pass
+				t_point = target_entry_point
+				force = ENTRY_REACTION_DISTANCE / (entry_distance + 0.3)
+
+	if t_point != null:
+		var desired_velocity = (t_point - get_2d_position()).normalized() * MAX_VELOCITY
+		var steering = desired_velocity - velocity
+		steering = steering.clamped(ENTRY_FORCE * force)
+		velocity = (velocity + steering).clamped(MAX_VELOCITY)
 
 func _physics_process(delta):
 	flee_dog()
@@ -138,6 +153,8 @@ func _physics_process(delta):
 	random_walk()
 
 	group_up()
+
+	do_enter()
 
 	velocity *= 1.0 - DRAG
 
