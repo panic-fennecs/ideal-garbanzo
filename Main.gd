@@ -1,6 +1,7 @@
 extends Spatial
 
 onready var SheepScene = preload("res://Sheep.tscn")
+onready var Level1 = preload("res://Level1.tscn")
 
 var sheep = []
 
@@ -20,4 +21,5 @@ func _input(event):
 
 func _ready():
 	randomize()
+	add_child(Level1.instance())
 	init_sheep()

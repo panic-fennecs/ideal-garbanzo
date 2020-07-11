@@ -44,5 +44,5 @@ func _physics_process(delta):
 	else:
 		move_animation.idle()
 
-func _on_Ground_clicked(pos):
+func position_changed(pos):
 	target_pos = pos

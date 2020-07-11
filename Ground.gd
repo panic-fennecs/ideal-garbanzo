@@ -1,16 +1,15 @@
-extends Spatial
+extends StaticBody
 
-signal clicked(pos)
 var pressing = false
 
-func _on_StaticBody_input_event(_camera, event, click_position, _click_normal, _shape_idx):
+func _on_Ground_input_event(_camera, event, click_position, _click_normal, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:
 				pressing = true
-				emit_signal("clicked", click_position)
+				$"/root/Main/Dog".position_changed(click_position)
 	if pressing and event is InputEventMouseMotion:
-		emit_signal("clicked", click_position)
+		$"/root/Main/Dog".position_changed(click_position)
 
 func _input(event):
 	if event is InputEventMouseButton and not event.pressed:
