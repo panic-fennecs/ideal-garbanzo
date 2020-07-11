@@ -24,6 +24,7 @@ func _ready():
 
 func _on_action():
 	# random walk
+	pass
 
 func get_2d_position():
 	return Vector2(self.translation.x, self.translation.z)
