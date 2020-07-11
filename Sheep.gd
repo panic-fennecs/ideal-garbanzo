@@ -15,6 +15,9 @@ const GROUP_PROPABILITY = 0.17
 const GROUP_UP_DURATION = 50
 const GROUP_FORCE = 0.07
 
+const ENTRY_REACTION_DISTANCE = 5
+const ENTRY_FINISHED_DISTANCE = 0.5
+
 const MAX_VELOCITY = 20
 const DRAG = 0.05
 const EPSILON = 0.0001
@@ -27,6 +30,7 @@ var target_entry_point: Vector2 = Vector2()
 var velocity = Vector2()
 var random_walk_frame_counter = 0
 var group_up_frame_counter = 0
+var in_finish = false
 # var panic = 0
 
 func _ready():
@@ -113,6 +117,16 @@ func group_up():
 		steering = steering.clamped(GROUP_FORCE)
 
 		velocity = (velocity + steering).clamped(MAX_VELOCITY)
+
+func do_enter():
+	if in_finish:
+		pass
+	else:
+		var position = get_2d_position()
+		var entry_distance = position.distance_to(target_entry_point)
+		if entry_distance < ENTRY_REACTION_DISTANCE:
+			if entry_distance < ENTRY_FINISHED_DISTANCE:
+				in_finish = true
 
 func _physics_process(delta):
 	flee_dog()
