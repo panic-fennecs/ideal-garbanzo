@@ -23,6 +23,7 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 15, 0 )
 current = true
 fov = 100.0
+far = 1000.0
 script = ExtResource( 4 )
 
 [node name="Dog" parent="." instance=ExtResource( 3 )]
