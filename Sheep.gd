@@ -40,7 +40,6 @@ func _on_action():
 
 	var distance = get_sheep_center().distance_to(get_2d_position())
 	var group_probability = GROUP_PROPABILITY * distance / 10.0
-	print(group_probability)
 	if randf() < group_probability:
 		group_up_frame_counter = GROUP_UP_DURATION
 
