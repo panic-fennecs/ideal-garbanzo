@@ -5,10 +5,9 @@ func _ready():
 
 func sheep_count():
 	var sheeps = $"/root/Main".sheep
-	var area = $"Area"
 	var count = 0
 	for sheep in sheeps:
-		if area.overlaps_body(sheep):
+		if sheep.in_finish:
 			count = count + 1
 	return count
 
