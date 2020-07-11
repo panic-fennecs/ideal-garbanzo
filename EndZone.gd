@@ -5,7 +5,6 @@ func _ready():
 
 func sheep_count():
 	var sheeps = $"/root/Main".sheep
-	var area = $"Area"
 	var count = 0
 	for sheep in sheeps:
 		if sheep.in_finish:
