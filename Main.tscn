@@ -82,5 +82,5 @@ light_color = Color( 0.92549, 0.905882, 0.603922, 1 )
 shadow_enabled = true
 
 [node name="EndZone" parent="." instance=ExtResource( 5 )]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 25.9566, -0.6, -33.9842 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9566, -1.61004, -33.9842 )
 [connection signal="clicked" from="Ground" to="Dog" method="_on_Ground_clicked"]
