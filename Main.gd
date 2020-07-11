@@ -19,4 +19,5 @@ func _input(event):
 		AudioPlayer.critical_level = min(AudioPlayer.critical_level + 1, 2)
 
 func _ready():
+	randomize()
 	init_sheep()
