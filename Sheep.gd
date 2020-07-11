@@ -162,4 +162,5 @@ func _physics_process(delta):
 		move_animation.idle()
 	else:
 		move_animation.move(Vector3(velocity.x, 0, velocity.y).normalized())
-		move_and_collide(Vector3(velocity.x, -translation.y, velocity.y) * delta)
+		move_and_slide(Vector3(velocity.x, -1, velocity.y), Vector3(0, 1, 0))
+		move_and_collide(Vector3(0, -100, 0))
