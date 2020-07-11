@@ -1,2 +1,1 @@
-- random walk
 - replace drag with better movement behaviour
