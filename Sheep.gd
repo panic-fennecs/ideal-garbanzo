@@ -36,6 +36,7 @@ var in_finish = false
 # var panic = 0
 
 func _ready():
+	randomize()
 	add_to_group("sheep")
 	main = get_node("/root/Main")
 	move_animation = $"MoveAnimation"
@@ -173,8 +174,9 @@ func _physics_process(delta):
 	else:
 		move_animation.move(Vector3(velocity.x, 0, velocity.y).normalized())
 		var _s = move_and_slide(Vector3(velocity.x, -1, velocity.y), Vector3(0, 1, 0))
-		_s = move_and_collide(Vector3(0, -100, 0))
 		for i in range(get_slide_count()):
 			var col = get_slide_collision(i)
 			if col and col.collider.is_in_group("sheep") and max_velocity > 20:
 				col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)
+	var _s = move_and_collide(Vector3(0, -100, 0))
+	
