@@ -22,6 +22,7 @@ radius = 0.825481
 height = 0.00507236
 
 [node name="Stone01" type="StaticBody"]
+input_ray_pickable = false
 
 [node name="Icosphere" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

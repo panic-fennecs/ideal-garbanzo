@@ -21,6 +21,7 @@ surfaces/0 = {
 height = 0.104047
 
 [node name="Stone03" type="StaticBody"]
+input_ray_pickable = false
 
 [node name="Cylinder" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
