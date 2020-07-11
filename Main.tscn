@@ -76,8 +76,9 @@ mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 104.152, 0 )
+transform = Transform( 0.882346, 0.176037, 0.436436, -0.454603, 0.0790862, 0.887176, 0.12166, -0.981201, 0.149809, 0, 104.152, 0 )
 light_color = Color( 0.92549, 0.905882, 0.603922, 1 )
+shadow_enabled = true
 
 [node name="EndZone" parent="." instance=ExtResource( 5 )]
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 25.9566, -0.6, -33.9842 )
