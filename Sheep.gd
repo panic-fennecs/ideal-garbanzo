@@ -1,13 +1,13 @@
 extends KinematicBody
 
 
-const DOG_REACTION_DISTANCE = 8
-const MAX_DOG_FORCE = 0.5
+const DOG_REACTION_DISTANCE = 12
+const MAX_DOG_FORCE = 0.9
 
 const MAX_OTHER_SHEEP_FORCE = 0.5
 
-const MAX_VELOCITY = 12
-const DRAG = 0.05
+const MAX_VELOCITY = 20
+const DRAG = 0.03
 const EPSILON = 0.0001
 
 var main
@@ -19,6 +19,11 @@ func _ready():
 	main = get_node("/root/Main")
 	move_animation = $"MoveAnimation"
 	move_animation.set_objects($"SheepModel", self)
+	$ActionTimer.wait_time = randf()*2.0
+	$ActionTimer.connect("timeout", self, "_on_action")
+
+func _on_action():
+	# random walk
 
 func get_2d_position():
 	return Vector2(self.translation.x, self.translation.z)
@@ -38,9 +43,10 @@ func flee_dog():
 	if dog.translation.distance_to(self.translation) < DOG_REACTION_DISTANCE:
 		var pos = Vector2(dog.translation.x, dog.translation.z)
 		var diff = get_2d_position() - pos
+		var influence = clamp(-1.0/DOG_REACTION_DISTANCE*diff.length() + 1, 0, 1)
 		var desired_velocity = diff * 100 / (diff.length() + 0.3)
 		var steering = desired_velocity - velocity
-		steering = steering.clamped(MAX_DOG_FORCE)
+		steering = steering.clamped(MAX_DOG_FORCE*influence)
 		velocity = (velocity + steering).clamped(MAX_VELOCITY)
 
 func follow_other_sheep():
