@@ -82,6 +82,7 @@ surfaces/0 = {
 radius = 0.709477
 
 [node name="Tree02" type="StaticBody"]
+input_ray_pickable = false
 
 [node name="Cube" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

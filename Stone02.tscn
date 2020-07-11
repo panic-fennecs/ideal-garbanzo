@@ -22,6 +22,7 @@ radius = 0.535726
 height = 0.239682
 
 [node name="Stone02" type="StaticBody"]
+input_ray_pickable = false
 
 [node name="Cylinder" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )

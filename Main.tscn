@@ -24,9 +24,9 @@ light_color = Color( 0.92549, 0.905882, 0.603922, 1 )
 shadow_enabled = true
 
 [node name="EndZone" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -74.7592, -1.61005, -199.186 )
+transform = Transform( 1, 0, 0, 0, 0.999949, -0.0101053, 0, 0.0101053, 0.999949, -74.7592, -6.20145, -210.695 )
 
 [node name="StartZone" parent="." instance=ExtResource( 5 )]
-transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, -1.20727, 0 )
+transform = Transform( -1.62921e-07, 0, -1, -0.0825647, 0.996586, 1.34515e-08, 0.996586, 0.0825647, -1.62365e-07, 0, -2.34219, 0 )
 
 [node name="SheepSpawn" type="Position3D" parent="."]

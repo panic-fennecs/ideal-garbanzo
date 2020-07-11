@@ -43,19 +43,25 @@ material/0 = ExtResource( 3 )
 [node name="Detail" type="Spatial" parent="."]
 
 [node name="Tree01" parent="Detail" instance=ExtResource( 5 )]
-transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.36168, 0.0297722, 0.387077 )
+transform = Transform( -0.0194555, 0, 0.00463496, 0, 0.02, 0, -0.00463496, 0, -0.0194555, 0.36168, 0.0297722, 0.387077 )
+input_ray_pickable = false
 
 [node name="Tree04" parent="Detail" instance=ExtResource( 5 )]
 transform = Transform( 0.0241595, 0, -0.0177853, 0, 0.03, 0, 0.0177853, 0, 0.0241595, 0.749319, 0.0355326, 0.442012 )
+input_ray_pickable = false
 
 [node name="Tree14" parent="Detail" instance=ExtResource( 5 )]
 transform = Transform( 0.00991493, 0, -0.0173693, 0, 0.02, 0, 0.0173693, 0, 0.00991493, 0.932103, 0.00084753, -0.223488 )
+input_ray_pickable = false
 
 [node name="Tree02" parent="Detail" instance=ExtResource( 7 )]
 transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.0173634, 0.02781, 0.621957 )
 
 [node name="Tree09" parent="Detail" instance=ExtResource( 7 )]
 transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.656532, 0.02781, -0.53878 )
+
+[node name="Tree15" parent="Detail" instance=ExtResource( 7 )]
+transform = Transform( 0.0162033, 0, -0.0117241, -1.43236e-06, 0.02, -1.97961e-06, 0.0117241, 2.44346e-06, 0.0162033, -0.162767, 0.02781, -0.309582 )
 
 [node name="Tree11" parent="Detail" instance=ExtResource( 7 )]
 transform = Transform( 3.14073e-07, 0, -0.001, 0, 0.001, 0, 0.001, 0, 3.14073e-07, 0.816725, 0.00333656, -0.646189 )
@@ -70,7 +76,7 @@ transform = Transform( 0.00616722, 0, -0.00509563, 0, 0.008, 0, 0.00509563, 0, 0
 transform = Transform( 0.008, 0, 2.09123e-06, 0, 0.008, 0, -2.09123e-06, 0, 0.008, 0.78952, 0.0256945, -0.397992 )
 
 [node name="Tree03" parent="Detail" instance=ExtResource( 8 )]
-transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.360678, 0.012048, 0.0117985 )
+transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.323001, 0.012048, -0.00642589 )
 
 [node name="Tree08" parent="Detail" instance=ExtResource( 8 )]
 transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.861185, 0.0120479, -0.449181 )
@@ -87,26 +93,41 @@ transform = Transform( -0.0062633, 0, -0.00497706, 0, 0.008, 0, 0.00497706, 0, -
 [node name="Stone01" parent="Detail" instance=ExtResource( 4 )]
 transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.262541, 0.0157461, 0.210938 )
 
+[node name="Stone11" parent="Detail" instance=ExtResource( 4 )]
+transform = Transform( -0.0415814, -0.0765708, -0.0106172, 0.0804762, -0.0395634, 0.0205484, -0.0266208, 0, 0.078703, 0.17017, 0.0382769, -0.104522 )
+
 [node name="Stone08" parent="Detail" instance=ExtResource( 4 )]
-transform = Transform( 0.02, 0, 0, 0, -0.00832403, -0.0181854, 0, 0.0181854, -0.00832403, 0.288956, 0.0216959, 0.146921 )
+transform = Transform( 0.02, 0, 0, 0, -0.00832403, -0.0181854, 0, 0.0181854, -0.00832403, 0.281805, 0.0209787, 0.155983 )
+
+[node name="Stone12" parent="Detail" instance=ExtResource( 4 )]
+transform = Transform( -0.0790008, -0.00232699, -0.00508374, -0.00419213, 0.016917, 0.0950906, 0.00149291, -0.0756344, -0.00200134, 7.12395e-05, 0.0103932, -0.270932 )
 
 [node name="Stone04" parent="Detail" instance=ExtResource( 4 )]
-transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.119264, 0.0178084, 0.177918 )
+transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.0256506, 0.115569, 0.0178084, 0.178607 )
 
 [node name="Stone07" parent="Detail" instance=ExtResource( 4 )]
-transform = Transform( -0.000447413, 0.00186927, 0.0199074, -0.0193498, 0.00497705, -0.000902215, -0.00503834, -0.0192804, 0.00169716, 0.144771, 0.0227236, 0.157006 )
+transform = Transform( -0.000447413, 0.00186927, 0.0199074, -0.0193498, 0.00497705, -0.000902215, -0.00503834, -0.0192804, 0.00169716, 0.0970118, 0.0227236, 0.164329 )
 
 [node name="Stone02" parent="Detail" instance=ExtResource( 6 )]
-transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.283792, 0.0216044, 0.234915 )
+transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.269931, 0.00714347, 0.228782 )
 
 [node name="Stone05" parent="Detail" instance=ExtResource( 6 )]
 transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.0928634, 0.0197449, 0.27279 )
+
+[node name="Stone09" parent="Detail" instance=ExtResource( 6 )]
+transform = Transform( -0.00188964, -0.0188628, 0.00637361, 0.00536175, -0.00664783, -0.0180847, 0.019175, 0, 0.00568499, 0.10276, 0.0137921, 0.217854 )
 
 [node name="Stone06" parent="Detail" instance=ExtResource( 6 )]
 transform = Transform( -0.00401199, 0, -0.0195935, 0, 0.02, 0, 0.0195935, 0, -0.00401199, 0.114126, 0.0197449, 0.208925 )
 
 [node name="Stone03" parent="Detail" instance=ExtResource( 9 )]
 transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.266249, 0.0105227, 0.176482 )
+
+[node name="Stone13" parent="Detail" instance=ExtResource( 9 )]
+transform = Transform( 0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.311291, 0.018489, 0.140028 )
+
+[node name="Stone10" parent="Detail" instance=ExtResource( 9 )]
+transform = Transform( 0.0273949, 0, 0, 0, 0.0336398, 0, 0, 0, 0.0301585, 0.0897391, 0.0086075, 0.232997 )
 
 [node name="Walls" type="StaticBody" parent="."]
 input_ray_pickable = false
