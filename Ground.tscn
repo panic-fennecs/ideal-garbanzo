@@ -151,3 +151,5 @@ shape = SubResource( 3 )
 transform = Transform( -1.62921e-08, 0, 1, 0, 1, 0, -0.1, 0, -1.62921e-07, -0.0207829, 0, 1.04082 )
 shape = SubResource( 3 )
 [connection signal="input_event" from="Ground" to="." method="_on_StaticBody_input_event"]
+
+[editable path="Detail/Tree07"]

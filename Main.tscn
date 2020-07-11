@@ -20,6 +20,7 @@ far = 1000.0
 script = ExtResource( 4 )
 
 [node name="Dog" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.0289335, 0, -0.999581, 0, 1, 0, 0.999581, 0, 0.0289335, -37.647, 0, 0 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.882346, 0.176037, 0.436436, -0.454603, 0.0790862, 0.887176, 0.12166, -0.981201, 0.149809, 0, 104.152, 0 )
@@ -31,4 +32,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -74.7592, -1.61005, -199.186 )
 
 [node name="StartZone" parent="." instance=ExtResource( 5 )]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, -1.20727, 0 )
+
+[node name="SheepSpawn" type="Position3D" parent="."]
 [connection signal="clicked" from="Ground" to="Dog" method="_on_Ground_clicked"]
