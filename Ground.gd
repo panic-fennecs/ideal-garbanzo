@@ -9,7 +9,9 @@ func _on_StaticBody_input_event(camera, event, click_position, click_normal, sha
 			if event.pressed:
 				pressing = true
 				emit_signal("clicked", click_position)
-			else:
-				pressing = false
 	if pressing and event is InputEventMouseMotion:
 		emit_signal("clicked", click_position)
+
+func _input(event):
+	if event is InputEventMouseButton and not event.pressed:
+		pressing = false
