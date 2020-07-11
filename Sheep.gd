@@ -127,6 +127,8 @@ func do_enter():
 		if entry_distance < ENTRY_REACTION_DISTANCE:
 			if entry_distance < ENTRY_FINISHED_DISTANCE:
 				in_finish = true
+			else:
+				pass
 
 func _physics_process(delta):
 	flee_dog()
