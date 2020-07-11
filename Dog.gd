@@ -1,14 +1,14 @@
 extends Spatial
 
 var target_pos = null
-var speed = 14
+var speed = 16
 var move_animation = null
 
 func _ready():
 	move_animation = $"MoveAnimation"
 	move_animation.set_objects($"DogModel", self)
 
-func _process(delta):
+func _physics_process(delta):
 	if target_pos:
 		var pos = transform.origin
 		var vec = target_pos - pos

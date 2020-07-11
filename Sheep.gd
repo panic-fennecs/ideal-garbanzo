@@ -6,7 +6,7 @@ const MAX_DOG_FORCE = 0.5
 
 const MAX_OTHER_SHEEP_FORCE = 0.5
 
-const MAX_VELOCITY = 8
+const MAX_VELOCITY = 12
 const DRAG = 0.05
 const EPSILON = 0.0001
 
