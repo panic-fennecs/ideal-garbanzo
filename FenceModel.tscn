@@ -108,6 +108,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="."]
+input_ray_pickable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 6.23999, 0, 0, 0, 6.19835, 0, 0, 0, 1, 6.00006, 3.91547, 0 )
