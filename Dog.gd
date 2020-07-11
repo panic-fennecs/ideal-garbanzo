@@ -7,6 +7,8 @@ var move_animation = null
 func _ready():
 	move_animation = $"MoveAnimation"
 	move_animation.set_objects($"DogModel", self)
+	move_animation.force = move_animation.force * 2
+	move_animation.gravitation = move_animation.gravitation * 4
 
 func _physics_process(delta):
 	if target_pos:
