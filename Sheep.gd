@@ -22,6 +22,8 @@ const EPSILON = 0.0001
 var main
 var other_sheep = []
 var move_animation = null
+var target_point: Vector2 = Vector2()
+var target_entry_point: Vector2 = Vector2()
 var velocity = Vector2()
 var random_walk_frame_counter = 0
 var group_up_frame_counter = 0
@@ -33,6 +35,10 @@ func _ready():
 	move_animation.set_objects($"SheepModel", self)
 	$ActionTimer.wait_time = randf()*2.0
 	$ActionTimer.connect("timeout", self, "_on_action")
+
+func init(target_position, entry_position):
+	target_point = target_position
+	target_entry_point = entry_position
 
 func _on_action():
 	if randf() < RANDOM_WALK_PROPABILITY:
