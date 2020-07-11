@@ -1,8 +1,8 @@
 extends KinematicBody
 
 
-const DOG_REACTION_DISTANCE = 12
-const MAX_DOG_FORCE = 0.9
+const DOG_REACTION_DISTANCE = 15
+const MAX_DOG_FORCE = 1.9
 const PUSH_FORCE = 20
 
 const MAX_OTHER_SHEEP_FORCE = 0.5
@@ -19,8 +19,9 @@ const GROUP_FORCE = 0.07
 const ENTRY_REACTION_DISTANCE = 12
 const ENTRY_FINISHED_DISTANCE = 4.0
 const ENTRY_FORCE = 0.3
+const DEFAULT_MAX_VELOCITY: float = 20.0
 
-var max_velocity = 20
+var max_velocity = DEFAULT_MAX_VELOCITY
 const DRAG = 0.05
 const EPSILON = 0.0001
 
@@ -167,7 +168,7 @@ func _physics_process(delta):
 	do_enter()
 
 	velocity *= 1.0 - DRAG
-	max_velocity = max(20, max_velocity - delta*200)
+	max_velocity = max(DEFAULT_MAX_VELOCITY, max_velocity - delta*200)
 
 	if velocity.length_squared() < 0.8:
 		move_animation.idle()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://brown.material" type="Material" id=2]
 
@@ -80,6 +80,9 @@ surfaces/0 = {
 [sub_resource type="BoxShape" id=6]
 extents = Vector3( 1, 1.05445, 1 )
 
+[sub_resource type="SphereShape" id=7]
+radius = 2.0
+
 [node name="FenceModel" type="Spatial"]
 
 [node name="Cube" type="MeshInstance" parent="."]
@@ -113,3 +116,11 @@ input_ray_pickable = false
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 transform = Transform( 6.23999, 0, 0, 0, 6.19835, 0, 0, 0, 1, 6.00006, 3.91547, 0 )
 shape = SubResource( 6 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2, 0 )
+shape = SubResource( 7 )
