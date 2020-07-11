@@ -2,3 +2,6 @@
 *.import
 *.blend1
 /export_presets.cfg
+/leaves.material
+/stone.material
+/wood.material
