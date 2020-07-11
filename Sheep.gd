@@ -42,6 +42,13 @@ func _ready():
 	move_animation.set_objects($"SheepModel", self)
 	$ActionTimer.wait_time = randf()*2.0
 	var _c = $ActionTimer.connect("timeout", self, "_on_action")
+	var r = randf() * .8 + .7
+	var c = randf() * .5 + .5
+	$"SheepModel".transform = $"SheepModel".transform.scaled(Vector3(r, r, r))
+	var mesh = $"SheepModel/Icosphere".get_mesh()
+	var material = mesh.surface_get_material(0).duplicate()
+	material.albedo_color = Color(c, c, c, 1)
+	mesh.surface_set_material(0, material)
 
 func init(target_position, entry_position):
 	target_point = target_position
