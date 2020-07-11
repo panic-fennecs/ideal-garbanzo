@@ -3,6 +3,7 @@ extends KinematicBody
 
 const DOG_REACTION_DISTANCE = 12
 const MAX_DOG_FORCE = 0.9
+const PUSH_FORCE = 20
 
 const MAX_OTHER_SHEEP_FORCE = 0.5
 
@@ -19,7 +20,7 @@ const ENTRY_REACTION_DISTANCE = 12
 const ENTRY_FINISHED_DISTANCE = 4.0
 const ENTRY_FORCE = 0.3
 
-const MAX_VELOCITY = 20
+var max_velocity = 20
 const DRAG = 0.05
 const EPSILON = 0.0001
 
@@ -35,6 +36,7 @@ var in_finish = false
 # var panic = 0
 
 func _ready():
+	add_to_group("sheep")
 	main = get_node("/root/Main")
 	move_animation = $"MoveAnimation"
 	move_animation.set_objects($"SheepModel", self)
@@ -83,7 +85,7 @@ func flee_dog():
 		var desired_velocity = diff * 100 / (diff.length() + 0.3)
 		var steering = desired_velocity - velocity
 		steering = steering.clamped(MAX_DOG_FORCE*influence)
-		velocity = (velocity + steering).clamped(MAX_VELOCITY)
+		velocity = (velocity + steering).clamped(max_velocity)
 
 func follow_other_sheep():
 	var other_sheep = get_other_sheep()
@@ -95,13 +97,13 @@ func follow_other_sheep():
 	var num_steerings = 0
 	for os in other_sheep:
 		var diff = os.translation - translation
-		var desired_velocity = os.velocity.normalized() * MAX_VELOCITY
+		var desired_velocity = os.velocity.normalized() * max_velocity
 		var steering = desired_velocity - velocity
 		var influence = 2.0 / (diff.length() + 1.0)
 		steering = steering.clamped(MAX_OTHER_SHEEP_FORCE) * influence
 		sum_steering += steering
 		num_steerings += 1
-	velocity = (velocity + sum_steering / num_steerings).clamped(MAX_VELOCITY)
+	velocity = (velocity + sum_steering / num_steerings).clamped(max_velocity)
 
 func random_walk():
 	if random_walk_frame_counter > 0:
@@ -110,17 +112,17 @@ func random_walk():
 		target_point += Vector2(randf()-0.5, randf()-0.5)
 		var steering = target_point - velocity
 		steering = steering.clamped(RANDOM_WALK_FORCE)
-		velocity = (velocity + steering).clamped(MAX_VELOCITY)
+		velocity = (velocity + steering).clamped(max_velocity)
 
 func group_up():
 	if group_up_frame_counter > 0:
 		group_up_frame_counter -= 1
 		var center = get_sheep_center()
-		var desired_velocity = (center - get_2d_position()).normalized() * MAX_VELOCITY
+		var desired_velocity = (center - get_2d_position()).normalized() * max_velocity
 		var steering = desired_velocity - velocity
 		steering = steering.clamped(GROUP_FORCE)
 
-		velocity = (velocity + steering).clamped(MAX_VELOCITY)
+		velocity = (velocity + steering).clamped(max_velocity)
 
 func do_enter():
 	var t_point = null
@@ -140,10 +142,14 @@ func do_enter():
 				force = ENTRY_REACTION_DISTANCE / (entry_distance + 0.3)
 
 	if t_point != null:
-		var desired_velocity = (t_point - get_2d_position()).normalized() * MAX_VELOCITY
+		var desired_velocity = (t_point - get_2d_position()).normalized() * max_velocity
 		var steering = desired_velocity - velocity
 		steering = steering.clamped(ENTRY_FORCE * force)
-		velocity = (velocity + steering).clamped(MAX_VELOCITY)
+		velocity = (velocity + steering).clamped(max_velocity)
+
+func push_away(force: Vector2):
+	velocity += force
+	max_velocity = 25
 
 func _physics_process(delta):
 	flee_dog()
@@ -157,6 +163,7 @@ func _physics_process(delta):
 	do_enter()
 
 	velocity *= 1.0 - DRAG
+	max_velocity = max(20, max_velocity - delta*200)
 
 	if velocity.length_squared() < 0.8:
 		move_animation.idle()
@@ -164,3 +171,6 @@ func _physics_process(delta):
 		move_animation.move(Vector3(velocity.x, 0, velocity.y).normalized())
 		move_and_slide(Vector3(velocity.x, -1, velocity.y), Vector3(0, 1, 0))
 		move_and_collide(Vector3(0, -100, 0))
+		var col = get_slide_collision(0)
+		if col and col.collider.is_in_group("sheep") and max_velocity > 20:
+			col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)
