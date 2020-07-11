@@ -22,7 +22,7 @@ func move(delta):
 	#transform.origin = Vector3(new_pos.x, pos.y, new_pos.z)
 	#move_and_slide(Vector3(0, -pos.y - 10, 0))
 	move_animation.move(horizontal_dir)
-	move_and_slide(Vector3(horizontal_vel.x, 0, horizontal_vel.z), Vector3(0, 1, 0))
+	var _s = move_and_slide(Vector3(horizontal_vel.x, 0, horizontal_vel.z), Vector3(0, 1, 0))
 	for i in range(get_slide_count()):
 		var col = get_slide_collision(i)
 		if col and col.collider.is_in_group("sheep"):
@@ -33,8 +33,8 @@ func move(delta):
 	l = max(0, horizontal_vel.length() * delta - l)
 	dir = vec.normalized()
 	var vel = dir * speed * l
-	move_and_slide(vel, Vector3(0, 1, 0))
-	move_and_collide(Vector3(0, -100, 0))
+	_s = move_and_slide(vel, Vector3(0, 1, 0))
+	_s = move_and_collide(Vector3(0, -100, 0))
 	return horizontal_vec.length() < 1
 
 func _physics_process(delta):

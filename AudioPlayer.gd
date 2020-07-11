@@ -54,9 +54,9 @@ func play_sample(sample, volume_db=0.0):
 	player.play()
 
 func _ready():
-	$MusicRefreshTimer.connect("timeout", self, "_refresh_music")
-	$ChangePartTimer.connect("timeout", self, "_change_music")
-	$RestartTimer.connect("timeout", self, "_restart_music")
+	var _c = $MusicRefreshTimer.connect("timeout", self, "_refresh_music")
+	_c = $ChangePartTimer.connect("timeout", self, "_change_music")
+	_c = $RestartTimer.connect("timeout", self, "_restart_music")
 	_current_music_player = PlayerWrapper.new(0, 1)
 	add_child(_current_music_player.player)
 	_current_music_player.player.play()

@@ -1,6 +1,6 @@
 extends Spatial
 
-func _process(delta):
+func _process(_delta):
 	var pos = global_transform.origin
 	var label = $"CanvasLayer/Label"
 	var camera = $"/root/Main/Camera"

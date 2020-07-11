@@ -3,7 +3,7 @@ extends Spatial
 signal clicked(pos)
 var pressing = false
 
-func _on_StaticBody_input_event(camera, event, click_position, click_normal, shape_idx):
+func _on_StaticBody_input_event(_camera, event, click_position, _click_normal, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT:
 			if event.pressed:

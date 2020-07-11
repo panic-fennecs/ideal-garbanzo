@@ -41,7 +41,7 @@ func _ready():
 	move_animation = $"MoveAnimation"
 	move_animation.set_objects($"SheepModel", self)
 	$ActionTimer.wait_time = randf()*2.0
-	$ActionTimer.connect("timeout", self, "_on_action")
+	var _c = $ActionTimer.connect("timeout", self, "_on_action")
 
 func init(target_position, entry_position):
 	target_point = target_position
@@ -88,14 +88,14 @@ func flee_dog():
 		velocity = (velocity + steering).clamped(max_velocity)
 
 func follow_other_sheep():
-	var other_sheep = get_other_sheep()
+	var o_sheep = get_other_sheep()
 
-	if not other_sheep:
+	if not o_sheep:
 		return
 
 	var sum_steering = Vector2()
 	var num_steerings = 0
-	for os in other_sheep:
+	for os in o_sheep:
 		var diff = os.translation - translation
 		var desired_velocity = os.velocity.normalized() * max_velocity
 		var steering = desired_velocity - velocity
@@ -108,9 +108,9 @@ func follow_other_sheep():
 func random_walk():
 	if random_walk_frame_counter > 0:
 		random_walk_frame_counter -= 1
-		var target_point = velocity.normalized() * RANDOM_WALK_TARGET_POINT_DISTANCE
-		target_point += Vector2(randf()-0.5, randf()-0.5)
-		var steering = target_point - velocity
+		var target = velocity.normalized() * RANDOM_WALK_TARGET_POINT_DISTANCE
+		target += Vector2(randf()-0.5, randf()-0.5)
+		var steering = target - velocity
 		steering = steering.clamped(RANDOM_WALK_FORCE)
 		velocity = (velocity + steering).clamped(max_velocity)
 
@@ -169,8 +169,9 @@ func _physics_process(delta):
 		move_animation.idle()
 	else:
 		move_animation.move(Vector3(velocity.x, 0, velocity.y).normalized())
-		move_and_slide(Vector3(velocity.x, -1, velocity.y), Vector3(0, 1, 0))
-		move_and_collide(Vector3(0, -100, 0))
-		var col = get_slide_collision(0)
-		if col and col.collider.is_in_group("sheep") and max_velocity > 20:
-			col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)
+		var _s = move_and_slide(Vector3(velocity.x, -1, velocity.y), Vector3(0, 1, 0))
+		_s = move_and_collide(Vector3(0, -100, 0))
+		for i in range(get_slide_count()):
+			var col = get_slide_collision(i)
+			if col and col.collider.is_in_group("sheep") and max_velocity > 20:
+				col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)

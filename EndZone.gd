@@ -11,5 +11,5 @@ func sheep_count():
 			count = count + 1
 	return count
 
-func _process(delta):
+func _process(_delta):
 	$"Label3D/CanvasLayer/Label".text = String(sheep_count()) + " Sheep"
