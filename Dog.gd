@@ -23,9 +23,10 @@ func move(delta):
 	#move_and_slide(Vector3(0, -pos.y - 10, 0))
 	move_animation.move(horizontal_dir)
 	move_and_slide(Vector3(horizontal_vel.x, 0, horizontal_vel.z), Vector3(0, 1, 0))
-	var col = get_slide_collision(0)
-	if col and col.collider.is_in_group("sheep"):
-		col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)
+	for i in range(get_slide_count()):
+		var col = get_slide_collision(i)
+		if col and col.collider.is_in_group("sheep"):
+			col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)
 	var new_pos = transform.origin
 	vec = new_pos - pos
 	var l = vec.length()
