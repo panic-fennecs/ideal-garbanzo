@@ -37,7 +37,7 @@ func _process(delta):
 		velocity = force * p
 		tilt_axis = -rotated_object.global_transform.basis.z
 		tilt_angle = 0
-		tilt_speed = (randf() * 15) * sign(randf() - .5)
+		tilt_speed = (randf() * 10) * sign(randf() - .5)
 
 	translated_object.transform.origin.y = initial_height + height
 	if target_dir:
