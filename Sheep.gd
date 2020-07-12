@@ -20,6 +20,8 @@ const ENTRY_REACTION_DISTANCE = 12
 const ENTRY_FINISHED_DISTANCE = 4.0
 const ENTRY_FORCE = 0.3
 const DEFAULT_MAX_VELOCITY: float = 20.0
+
+const AVOIDANCE_LOOK_AHEADS = [2.0, 4.0, 8.0]
 const AVOIDANCE_FORCE = 0.2
 
 var max_velocity = DEFAULT_MAX_VELOCITY
@@ -171,14 +173,15 @@ func avoid_obstacles():
 
 func collides_with_obstacle(obstacle):
 	var position = get_2d_position()
-	var obstacle_position = Vector2(obstacle.translation.x, obstacle.translation.z)
+	var obstacle_position = Vector2(obstacle.global_transform.origin.x, obstacle.global_transform.origin.z)
+	var radius = obstacle.get_radius()
 	var aheads = []
-	for r in [0.5, 1.0, 2.0]:
-		aheads.append(get_2d_position() + velocity * r)
+	for r in AVOIDANCE_LOOK_AHEADS:
+		aheads.append(position + velocity.normalized() * r)
 	var index = 0
 	var nearest_index = 100
 	for ahead in aheads:
-		if position.distance_squared_to(obstacle_position) < obstacle.get_radius()*obstacle.get_radius():
+		if ahead.distance_squared_to(obstacle_position) < radius*radius:
 			nearest_index = min(nearest_index, index)
 		index += 1
 
@@ -187,18 +190,16 @@ func collides_with_obstacle(obstacle):
 	return nearest_index
 
 func avoid_obstacle(obstacle):
-	var obstacle_position = Vector2(obstacle.translation.x, obstacle.translation.z)
+	var obstacle_position = Vector2(obstacle.global_transform.origin.x, obstacle.global_transform.origin.z)
 	var radius = obstacle.get_radius()
 	var position = get_2d_position()
 	var aheads = []
-	for r in [0.5, 1.0, 2.0]:
-		aheads.append(get_2d_position() + velocity * r)
-	print('try to avoid')
+	for r in AVOIDANCE_LOOK_AHEADS:
+		aheads.append(position + velocity.normalized() * r)
 	for ahead in aheads:
-		if position.distance_squared_to(obstacle_position) < radius*radius:
-			var avoidance_force = (ahead - obstacle_position).clamped(AVOIDANCE_FORCE)
+		if ahead.distance_squared_to(obstacle_position) < radius*radius:
+			var avoidance_force = (ahead - obstacle_position).normalized() * AVOIDANCE_FORCE
 			velocity = (velocity + avoidance_force).clamped(max_velocity)
-			print('avoid')
 			break
 
 func _physics_process(delta):
