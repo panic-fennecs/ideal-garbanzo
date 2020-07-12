@@ -95,10 +95,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.675, 20.1115, 214.706 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -81.7639, 27.8381, 155.436 )
 
 [node name="Wolf" parent="." instance=ExtResource( 7 )]
-transform = Transform( -0.884035, 0, -0.467421, 0, 1, 0, 0.467421, 0, -0.884035, 69.0863, 22.1461, 165.834 )
-
-[node name="Wolf2" parent="." instance=ExtResource( 7 )]
-transform = Transform( -0.884035, 0, -0.467421, 0, 1, 0, 0.467421, 0, -0.884035, -118.683, 29.7745, -29.7077 )
+transform = Transform( -0.884035, 0, -0.467421, 0, 1, 0, 0.467421, 0, -0.884035, 23.8998, 21.1741, 165.834 )
 
 [node name="Walls" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.852966, 0, 1.05518 )
@@ -317,4 +314,7 @@ transform = Transform( 30, 0, 0, 0, 35, 0, 0, 0, 30, -25.4361, 16.5979, -97.161 
 transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, -99.024, 28.7769, 136.539 )
 
 [node name="SheepContainer" type="Spatial" parent="."]
+
+[node name="Wolf2" parent="." instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -138.248, 16.7342, -49.168 )
 [connection signal="input_event" from="Ground" to="Ground" method="_on_Ground_input_event"]
