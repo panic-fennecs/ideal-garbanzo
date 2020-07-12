@@ -41,7 +41,7 @@ sheep_count = 5
 transform = Transform( 0.0111934, -0.242007, -0.970209, -0.049527, 0.968946, -0.242262, 0.998711, 0.0507633, -0.00114008, 34.6639, 56.4763, -139.842 )
 
 [node name="Spawn" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.675, 19.4763, 214.706 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.675, 20.1115, 214.706 )
 
 [node name="Hay2" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108.833, 24.2546, 190.891 )

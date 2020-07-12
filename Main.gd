@@ -1,8 +1,11 @@
 extends Spatial
 
 onready var Level1 = preload("res://Level1.tscn")
+onready var Level2 = preload("res://Level2.tscn")
 
 var sheep = []
+var level = 0
+var scene_transition = false
 
 func _input(event):
 	if event is InputEventKey and event.scancode == 65 and event.pressed:
@@ -10,16 +13,10 @@ func _input(event):
 
 func _ready():
 	randomize()
-	sheep.clear()
-	add_child(Level1.instance())
-	$Camera.transform.origin = get_node("Level/Spawn").global_transform.origin
-	$Dog.transform.origin = get_node("Level/Spawn").global_transform.origin
-	var end_pos = get_node("Level/EndZone").global_transform.origin
-	var end_entry_pos = $"Level/EndZone/Entry".global_transform.origin
-	get_node("Level/StartZone").init_sheep(Vector2(end_pos.x, end_pos.z), Vector2(end_entry_pos.x, end_entry_pos.z))
+	next_level()
 
 func _physics_process(_delta):
-		remove_dead_sheep()
+	remove_dead_sheep()
 
 func get_num_finished_sheep():
 	var n = 0
@@ -35,3 +32,28 @@ func remove_dead_sheep():
 			sheep.remove(index)
 		else:
 			index += 1
+
+func next_level():
+	sheep.clear()
+	if has_node("Level"):
+		get_node("Level").queue_free()
+	$LevelChangeTimer.start()
+
+
+func _on_LevelChangeTimer_timeout():
+	var new_level
+	match level:
+		0:
+			new_level = Level1.instance()
+		1:
+			new_level = Level2.instance()
+	
+
+	add_child(new_level)
+	var end_pos = new_level.get_node("EndZone").global_transform.origin
+	var end_entry_pos = new_level.get_node("EndZone/Entry").global_transform.origin
+	new_level.get_node("StartZone").init_sheep(Vector2(end_pos.x, end_pos.z), Vector2(end_entry_pos.x, end_entry_pos.z), new_level)
+	$Dog.global_transform.origin = new_level.get_node("Spawn").global_transform.origin
+	$Camera.global_transform.origin = new_level.get_node("Spawn").global_transform.origin
+	
+	level += 1
