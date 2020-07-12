@@ -1,5 +1,7 @@
 extends KinematicBody
 
+onready var Achievement = preload("res://Achievement.tscn")
+
 const MAX_VELOCITY = 20
 const MAX_PULL_VELOCITY = 5
 const DRAG = 0.03
@@ -17,6 +19,7 @@ var velocity: Vector2 = Vector2()
 var home_position: Vector2
 var target_sheep = null
 var max_velocity
+var already_guardian_achievement = false
 
 func _ready():
 	home_position = get_2d_position()
@@ -36,6 +39,13 @@ func check_for_sheep():
 			state = "RUN"
 			break
 
+func guardian_achievement():
+	if not already_guardian_achievement:
+		already_guardian_achievement = true
+		var achievement = Achievement.instance()
+		$"/root/Main".add_child(achievement)
+		achievement.show_achievement("Guardian", "Protect sheep from wolf", Color(105.0/255.0, 147.0/255.0, 202.0/255.0, 1.0))
+
 func run_to_target():
 	var target_pos = Vector2(target_sheep.translation.x, target_sheep.translation.z)
 	var desired_velocity = (target_pos - get_2d_position()).normalized() * max_velocity
@@ -48,6 +58,7 @@ func run_to_target():
 		target_sheep = null
 		state = "BACK"
 		max_velocity = MAX_VELOCITY
+		guardian_achievement()
 
 func handle_sheep_collision(sheep):
 	if state == "RUN":
@@ -77,6 +88,7 @@ func pull_sheep():
 		target_sheep = null
 		$AttackLabel/CanvasLayer/Sprite.visible = false
 		max_velocity = MAX_VELOCITY
+		guardian_achievement()
 
 	if home_position.distance_squared_to(pos) < 100:
 		target_sheep.die()
