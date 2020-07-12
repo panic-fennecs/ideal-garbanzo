@@ -12,7 +12,7 @@ sky_curve = 0.2
 [sub_resource type="Environment" id=2]
 background_mode = 2
 background_sky = SubResource( 1 )
-background_sky_custom_fov = 160.0
+background_sky_custom_fov = 167.0
 background_sky_orientation = Basis( 1, 0, 0, 0, 1.07, 0, 0, 0, 1 )
 fog_enabled = true
 dof_blur_far_distance = 145.53
