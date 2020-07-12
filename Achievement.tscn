@@ -13,7 +13,7 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Show"
-length = 4.0
+length = 8.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:rect_position")
 tracks/0/interp = 2
@@ -21,7 +21,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( -8.57419, 11.3137 ),
 "update": 0,
 "values": [ Vector2( 161, 670.378 ), Vector2( 161, 500 ) ]
@@ -33,7 +33,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3, 4 ),
+"times": PoolRealArray( 0, 6, 8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -52,10 +52,10 @@ __meta__ = {
 anchor_top = 1.127
 anchor_right = 1.0
 anchor_bottom = 1.227
-margin_left = 160.5
-margin_top = -0.200195
-margin_right = -160.5
-margin_bottom = -0.200073
+margin_left = 161.0
+margin_top = -5.82202
+margin_right = -160.0
+margin_bottom = -5.8219
 color = Color( 0.819608, 0.831373, 0.490196, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
