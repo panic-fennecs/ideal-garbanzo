@@ -7,3 +7,4 @@
 juice
 - water shader
 - shading in general
+- see where we clicked

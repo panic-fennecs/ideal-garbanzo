@@ -8,8 +8,10 @@ func _on_Ground_input_event(_camera, event, click_position, _click_normal, _shap
 			if event.pressed:
 				pressing = true
 				$"/root/Main/Dog".position_changed(click_position)
+				$"/root/Main/Cursor".set_cursor(click_position)
 	if pressing and event is InputEventMouseMotion:
 		$"/root/Main/Dog".position_changed(click_position)
+		$"/root/Main/Cursor".set_cursor(click_position)
 
 func _input(event):
 	if event is InputEventMouseButton and not event.pressed:
