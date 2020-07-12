@@ -43,8 +43,8 @@ func _process(delta):
 	if target_dir:
 		var dir = -rotated_object.global_transform.basis.z
 		dir = dir.linear_interpolate(target_dir, max(10 * delta, 0))
-		var up = Vector3.UP.rotated(tilt_axis, tilt_angle)
-		rotated_object.transform = rotated_object.global_transform.looking_at(rotated_object.global_transform.origin + dir, up)
+		var up = Vector3.UP.rotated(tilt_axis.normalized(), tilt_angle)
+		rotated_object.look_at(rotated_object.global_transform.origin + dir, up)
 
 func idle():
 	moving = false

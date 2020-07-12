@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Ideal-garbanzo"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://StartScreen.tscn"
 
 [autoload]
 
@@ -24,4 +24,5 @@ AudioPlayer="*res://AudioPlayer.tscn"
 
 [rendering]
 
+quality/filters/msaa=2
 environment/default_environment="res://default_env.tres"

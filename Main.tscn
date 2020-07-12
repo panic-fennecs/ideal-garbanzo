@@ -1,14 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://Dog.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Camera.gd" type="Script" id=4]
 
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.2, 0.486275, 0.596078, 1 )
+sky_horizon_color = Color( 0.827451, 0.6, 0.898039, 1 )
+sky_curve = 0.2
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_sky_custom_fov = 160.0
+background_sky_orientation = Basis( 1, 0, 0, 0, 1.07, 0, 0, 0, 1 )
+fog_enabled = true
+dof_blur_far_distance = 145.53
+dof_blur_far_transition = 19.0
+
 [node name="Main" type="Spatial"]
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 15, 0 )
+transform = Transform( 1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 0, 15.118, 0 )
 current = true
 fov = 100.0
 far = 1000.0
@@ -21,3 +35,6 @@ transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0
 transform = Transform( 0.882346, 0.176037, 0.436436, -0.454603, 0.0790862, 0.887176, 0.12166, -0.981201, 0.149809, 0, 104.152, 0 )
 light_color = Color( 0.92549, 0.905882, 0.603922, 1 )
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
