@@ -148,7 +148,7 @@ margin_right = -50.0
 margin_bottom = -0.199951
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Herd Control"
+text = "sheeps best friend"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": true
