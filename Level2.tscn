@@ -26,5 +26,5 @@ transform = Transform( 0.0111934, -0.242007, -0.970209, -0.049527, 0.968946, -0.
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.675, 19.4763, 214.706 )
 
 [node name="Hay2" parent="." instance=ExtResource( 5 )]
-transform = Transform( 2.5264, 0, 0, 0, 2.5264, 0, 0, 0, 2.5264, 108.833, 24.2546, 190.891 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108.833, 24.2546, 190.891 )
 [connection signal="input_event" from="Ground" to="Ground" method="_on_Ground_input_event"]

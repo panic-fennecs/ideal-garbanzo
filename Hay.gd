@@ -13,6 +13,7 @@ func mix(a, b, t):
 
 func _process(delta):
 	if dir:
+		transform = transform.looking_at(transform.origin + dir, Vector3.UP)
 		var vel = dir * mix(speed, 0, min(1, time))
 		var _c = move_and_slide(vel, Vector3.UP)
 		_c = move_and_collide(Vector3.UP * -100)
