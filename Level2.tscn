@@ -9,15 +9,16 @@
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.41757, 0 )
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
+transform = Transform( 250, 0, 0, 0, 250, 0, 0, 0, 250, 0, 0, 0 )
 script = ExtResource( 1 )
 
 [node name="StartZone" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.0425054, -0.105974, -0.99346, -0.230269, 0.966549, -0.112955, 0.972198, 0.233564, 0.0166811, 1.88937, -1.87362, 0 )
+transform = Transform( 0.0425054, -0.105974, -0.99346, -0.230269, 0.966549, -0.112955, 0.972198, 0.233564, 0.0166811, 141.76, 21.1724, 213.615 )
 sheep_count = 5
 
 [node name="EndZone" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.131481, -0.161902, -0.978008, -0.0552359, 0.983844, -0.170293, 0.989779, 0.0764115, 0.120414, -218.78, 68.5265, -702.218 )
+transform = Transform( 0.0111934, -0.242007, -0.970209, -0.049527, 0.968946, -0.242262, 0.998711, 0.0507633, -0.00114008, 34.6639, 56.4763, -139.842 )
 
 [node name="Spawn" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5722, -2.9854, 1.63582 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.675, 19.4763, 214.706 )
 [connection signal="input_event" from="Ground" to="Ground" method="_on_Ground_input_event"]

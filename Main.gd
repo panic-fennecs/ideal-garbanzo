@@ -12,6 +12,7 @@ func _ready():
 	randomize()
 	sheep.clear()
 	add_child(Level1.instance())
+	$Camera.transform.origin = get_node("Level/Spawn").global_transform.origin
 	$Dog.transform.origin = get_node("Level/Spawn").global_transform.origin
 	var end_pos = get_node("Level/EndZone").global_transform.origin
 	var end_entry_pos = end_pos + get_node("Level/EndZone/Entry").transform.origin
