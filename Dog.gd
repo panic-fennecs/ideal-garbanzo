@@ -4,6 +4,8 @@ var target_pos = null
 var speed = 16
 var move_animation = null
 var PUSH_FORCE = 30
+var pushed_hay_before = false
+onready var Achievement = preload("res://Achievement.tscn")
 
 func _ready():
 	move_animation = $"MoveAnimation"
@@ -31,6 +33,11 @@ func move(delta):
 				col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)
 			elif col.collider.is_in_group("hay"):
 				col.collider.push(Vector2(-col.normal.x, -col.normal.z).normalized())
+				if not pushed_hay_before:
+					pushed_hay_before = true
+					var achievement = Achievement.instance()
+					$"/root/Main".add_child(achievement)
+					achievement.show_achievement("hay hay hay", "sheeps best friend", Color(0.49, 0.82, 0.83, 1.0))
 	var new_pos = transform.origin
 	vec = new_pos - pos
 	var l = vec.length()
