@@ -83,7 +83,7 @@ material/0 = ExtResource( 8 )
 
 [node name="StartZone" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.0425054, -0.105974, -0.99346, -0.0399592, 0.993383, -0.107675, 0.998297, 0.0442744, 0.0379895, 141.76, 25.0523, 189.768 )
-sheep_count = 5
+sheep_count = 10
 
 [node name="EndZone" parent="." instance=ExtResource( 4 )]
 transform = Transform( 0.00899014, -0.19888, -0.979982, 0.00108901, 0.980024, -0.198877, 0.99996, 0.000720724, 0.00902708, 85.9197, 68.5479, -139.842 )
