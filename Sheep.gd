@@ -100,6 +100,18 @@ func flee(maybe_dog):
 		steering = steering.clamped(MAX_DOG_FORCE*influence)
 		velocity = (velocity + steering).clamped(max_velocity)
 
+func chaise(dog):
+	if dog.translation.distance_to(self.translation) < DOG_REACTION_DISTANCE:
+		var pos = Vector2(dog.translation.x, dog.translation.z)
+		var diff = pos - get_2d_position()
+		var influence = clamp(1.0/DOG_REACTION_DISTANCE*diff.length() - .5, 0, 1)
+		var desired_velocity = diff * 100 / (diff.length() + 0.3)
+		var steering = desired_velocity - velocity
+		steering = steering.clamped(MAX_DOG_FORCE*influence)
+		velocity = (velocity + steering).clamped(max_velocity)
+		return true
+	return false
+
 func follow_other_sheep():
 	var o_sheep = get_other_sheep()
 
@@ -214,14 +226,17 @@ func hold_by_wolf():
 func _physics_process(delta):
 	if state == "NORMAL":
 		flee(get_dog())
+		var eating_hay = false
 		var hays = $"/root/Main/Level".hays
 		if hays and hays is Array:
 			for hay in hays:
-				flee(hay)
-		follow_other_sheep()
-		random_walk()
-		group_up()
-		avoid_obstacles()
+				if not eating_hay:
+					eating_hay = chaise(hay)
+		if not eating_hay:
+			follow_other_sheep()
+			random_walk()
+			group_up()
+			avoid_obstacles()
 		do_enter()
 	elif state == "PULLED":
 		hold_by_wolf()

@@ -3,7 +3,7 @@ extends KinematicBody
 var dir = null
 var speed = 30
 var time = 0
-var damp = .5
+var damp = 1
 
 func _ready():
 	add_to_group("hay")
