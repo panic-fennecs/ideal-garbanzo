@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var Level1 = preload("res://Level2.tscn")
+onready var Level1 = preload("res://Level1.tscn")
 onready var Level2 = preload("res://Level2.tscn")
 
 var sheep = []
