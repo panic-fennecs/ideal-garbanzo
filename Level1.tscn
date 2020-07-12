@@ -196,7 +196,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.200365, 0, 0.06521 )
 shape = SubResource( 4 )
 [connection signal="input_event" from="Ground" to="Ground" method="_on_Ground_input_event"]
 [connection signal="body_entered" from="AchievementArea" to="AchievementArea" method="_on_AchievementArea_body_entered"]
-[connection signal="body_exited" from="AchievementArea" to="AchievementArea" method="_on_AchievementArea_body_exited"]
 
 [editable path="TerrainModel"]
 
