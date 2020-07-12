@@ -8,4 +8,5 @@ func init_sheep(end_pos, entry):
 		var s = SheepScene.instance()
 		s.transform.origin = global_transform.origin + Vector3((randf()-0.5)*20.0, 5, (randf()-0.5)*20.0)
 		$"/root/Main".add_child(s)
+		$"/root/Main".sheep.append(s)
 		s.init(end_pos, entry)
