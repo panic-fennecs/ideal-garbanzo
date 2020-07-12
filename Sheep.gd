@@ -85,8 +85,8 @@ func get_sheep_center():
 func get_dog():
 	return main.get_node("Dog")
 
-func flee_dog():
-	var dog = get_dog()
+func flee(maybe_dog):
+	var dog = maybe_dog
 	if dog.translation.distance_to(self.translation) < DOG_REACTION_DISTANCE:
 		var pos = Vector2(dog.translation.x, dog.translation.z)
 		var diff = get_2d_position() - pos
@@ -203,7 +203,11 @@ func avoid_obstacle(obstacle):
 			break
 
 func _physics_process(delta):
-	flee_dog()
+	flee(get_dog())
+	var hays = $"/root/Main/Level".hays
+	if hays and hays is Array:
+		for hay in hays:
+			flee(hay)
 
 	follow_other_sheep()
 

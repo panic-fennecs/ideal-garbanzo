@@ -1,12 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Ground.gd" type="Script" id=1]
 [ext_resource path="res://Terrain2Model.tscn" type="PackedScene" id=2]
 [ext_resource path="res://StartZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://EndZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Hay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Level2.gd" type="Script" id=6]
 
 [node name="Level" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.41757, 0 )
+script = ExtResource( 6 )
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
 transform = Transform( 250, 0, 0, 0, 250, 0, 0, 0, 250, 0, 0, 0 )
@@ -21,4 +24,7 @@ transform = Transform( 0.0111934, -0.242007, -0.970209, -0.049527, 0.968946, -0.
 
 [node name="Spawn" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.675, 19.4763, 214.706 )
+
+[node name="Hay2" parent="." instance=ExtResource( 5 )]
+transform = Transform( 2.5264, 0, 0, 0, 2.5264, 0, 0, 0, 2.5264, 108.833, 24.2546, 190.891 )
 [connection signal="input_event" from="Ground" to="Ground" method="_on_Ground_input_event"]
