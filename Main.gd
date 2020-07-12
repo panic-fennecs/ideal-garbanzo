@@ -2,6 +2,7 @@ extends Spatial
 
 onready var Level1 = preload("res://Level1.tscn")
 onready var Level2 = preload("res://Level2.tscn")
+onready var StartScreen = load("res://StartScreen.tscn")
 
 var sheep = []
 var level = 0
@@ -48,12 +49,16 @@ func _on_LevelChangeTimer_timeout():
 		1:
 			new_level = Level2.instance()
 			AudioPlayer.critical_level = 2
+		2:
+			get_tree().change_scene_to(StartScreen)
+			return
 	
 	add_child(new_level)
-	var end_pos = get_node("Level/EndZone").global_transform.origin
-	var end_entry_pos = get_node("Level/EndZone/Entry").global_transform.origin
-	get_node("Level/StartZone").init_sheep(Vector2(end_pos.x, end_pos.z), Vector2(end_entry_pos.x, end_entry_pos.z), get_node("Level/StartZone").global_transform.origin, get_node("Level/SheepContainer"))
-	$Dog.global_transform.origin = get_node("Level/Spawn").global_transform.origin
-	$Camera.global_transform.origin = $Dog.global_transform.origin
+	if level != 2:
+		var end_pos = get_node("Level/EndZone").global_transform.origin
+		var end_entry_pos = get_node("Level/EndZone/Entry").global_transform.origin
+		get_node("Level/StartZone").init_sheep(Vector2(end_pos.x, end_pos.z), Vector2(end_entry_pos.x, end_entry_pos.z), get_node("Level/StartZone").global_transform.origin, get_node("Level/SheepContainer"))
+		$Dog.global_transform.origin = get_node("Level/Spawn").global_transform.origin
+		$Camera.global_transform.origin = $Dog.global_transform.origin
 	
 	level += 1
