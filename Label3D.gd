@@ -2,7 +2,7 @@ extends Spatial
 
 func _process(_delta):
 	var pos = global_transform.origin
-	var label = $"CanvasLayer/Label"
 	var camera = $"/root/Main/Camera"
-	var offset = label.get_size() / 2
-	label.set_position(camera.unproject_position(pos) - offset)
+	var offset_label =  $"CanvasLayer/Label".get_size() / 2
+	$"CanvasLayer/Label".set_position(camera.unproject_position(pos) - offset_label)
+	$CanvasLayer/Sprite.set_position(camera.unproject_position(pos))
