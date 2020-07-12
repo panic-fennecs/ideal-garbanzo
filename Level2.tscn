@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Ground.gd" type="Script" id=1]
 [ext_resource path="res://Terrain2Model.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://EndZone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Hay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Level2.gd" type="Script" id=6]
+[ext_resource path="res://Wolf.tscn" type="PackedScene" id=7]
 
 [node name="Level" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.41757, 0 )
@@ -27,4 +28,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.675, 19.4763, 214.706 )
 
 [node name="Hay2" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108.833, 24.2546, 190.891 )
+
+[node name="Wolf" parent="." instance=ExtResource( 7 )]
+transform = Transform( -0.884035, 0, -0.467421, 0, 1, 0, 0.467421, 0, -0.884035, 81.0008, 22.1881, 185.304 )
 [connection signal="input_event" from="Ground" to="Ground" method="_on_Ground_input_event"]

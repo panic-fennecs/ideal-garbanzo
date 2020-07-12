@@ -24,11 +24,14 @@ const DEFAULT_MAX_VELOCITY: float = 20.0
 const AVOIDANCE_LOOK_AHEADS = [2.0, 4.0, 8.0]
 const AVOIDANCE_FORCE = 0.2
 
+const WOLF_HOLD_FORCE = 2.0
+
 var max_velocity = DEFAULT_MAX_VELOCITY
 const DRAG = 0.05
 const EPSILON = 0.0001
 
 var main
+var state = "NORMAL"
 var other_sheep = []
 var move_animation = null
 var target_point: Vector2 = Vector2()
@@ -37,6 +40,7 @@ var velocity = Vector2()
 var random_walk_frame_counter = 0
 var group_up_frame_counter = 0
 var in_finish = false
+var wolf_hold_pos = null
 # var panic = 0
 
 func _ready():
@@ -202,22 +206,25 @@ func avoid_obstacle(obstacle):
 			velocity = (velocity + avoidance_force).clamped(max_velocity)
 			break
 
+func hold_by_wolf():
+	var desired_velocity = (wolf_hold_pos - get_2d_position()).clamped(max_velocity)
+	var steering = (desired_velocity - velocity).clamped(WOLF_HOLD_FORCE)
+	velocity = (velocity + steering).clamped(max_velocity)
+
 func _physics_process(delta):
-	flee(get_dog())
-	var hays = $"/root/Main/Level".hays
-	if hays and hays is Array:
-		for hay in hays:
-			flee(hay)
-
-	follow_other_sheep()
-
-	random_walk()
-
-	group_up()
-
-	avoid_obstacles()
-
-	do_enter()
+	if state == "NORMAL":
+		flee(get_dog())
+		var hays = $"/root/Main/Level".hays
+		if hays and hays is Array:
+			for hay in hays:
+				flee(hay)
+		follow_other_sheep()
+		random_walk()
+		group_up()
+		avoid_obstacles()
+		do_enter()
+	elif state == "PULLED":
+		hold_by_wolf()
 
 	velocity *= 1.0 - DRAG
 	max_velocity = max(DEFAULT_MAX_VELOCITY, max_velocity - delta*200)
@@ -225,7 +232,10 @@ func _physics_process(delta):
 	if velocity.length_squared() < 0.8:
 		move_animation.idle()
 	else:
-		move_animation.move(Vector3(velocity.x, 0, velocity.y).normalized())
+		if state == "PULLED":
+			move_animation.idle()
+		else:
+			move_animation.move(Vector3(velocity.x, 0, velocity.y).normalized())
 		var _s = move_and_slide(Vector3(velocity.x, -1, velocity.y), Vector3(0, 1, 0))
 		for i in range(get_slide_count()):
 			var col = get_slide_collision(i)
