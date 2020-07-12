@@ -29,6 +29,8 @@ func move(delta):
 	for i in range(get_slide_count()):
 		var col = get_slide_collision(i)
 		if col:
+			if col.collider.has_method("manage_fence_collision"):
+				col.collider.manage_fence_collision(col.normal)
 			if col.collider.is_in_group("sheep"):
 				col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)
 			elif col.collider.is_in_group("hay"):
