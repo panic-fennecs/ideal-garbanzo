@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://StartZone.gd" type="Script" id=1]
+[ext_resource path="res://Fence.tscn" type="PackedScene" id=3]
+
+[node name="StartZone" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Fence" parent="." instance=ExtResource( 3 )]

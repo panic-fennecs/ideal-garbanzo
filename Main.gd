@@ -1,19 +1,8 @@
 extends Spatial
 
-onready var SheepScene = preload("res://Sheep.tscn")
 onready var Level1 = preload("res://Level1.tscn")
 
 var sheep = []
-
-func init_sheep():
-	for _i in range(20):
-		var s = SheepScene.instance()
-		s.translate($SheepSpawn.transform.origin + Vector3((randf()-0.5)*20.0, 1, (randf()-0.5)*20.0))
-		add_child(s)
-		var end_pos = $"EndZone".global_transform.origin
-		end_pos = Vector2(end_pos.x, end_pos.z)
-		s.init(end_pos, end_pos + Vector2(0, 11))
-		sheep.append(s)
 
 func _input(event):
 	if event is InputEventKey and event.scancode == 65 and event.pressed:
@@ -21,5 +10,9 @@ func _input(event):
 
 func _ready():
 	randomize()
+	sheep.clear()
 	add_child(Level1.instance())
-	init_sheep()
+	$Dog.transform.origin = get_node("Level/Spawn").global_transform.origin
+	var end_pos = get_node("Level/EndZone").global_transform.origin
+	var end_entry_pos = end_pos + get_node("Level/EndZone/Entry").transform.origin
+	get_node("Level/StartZone").init_sheep(Vector2(end_pos.x, end_pos.z), Vector2(end_entry_pos.x, end_entry_pos.z))

@@ -26,3 +26,6 @@ __meta__ = {
 }
 
 [node name="Fence" parent="." instance=ExtResource( 3 )]
+
+[node name="Entry" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11 )
