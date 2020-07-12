@@ -1,6 +1,6 @@
 extends Spatial
 
-onready var Level1 = preload("res://Level2.tscn")
+onready var Level1 = preload("res://Level1.tscn")
 onready var Level2 = preload("res://Level2.tscn")
 
 var sheep = []
@@ -47,6 +47,7 @@ func _on_LevelChangeTimer_timeout():
 			new_level = Level1.instance()
 		1:
 			new_level = Level2.instance()
+			AudioPlayer.critical_level = 2
 	
 	add_child(new_level)
 	var end_pos = get_node("Level/EndZone").global_transform.origin

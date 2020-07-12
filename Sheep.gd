@@ -98,7 +98,6 @@ func get_sheep_center():
 	var pos_sum = Vector2()
 	for s in get_other_sheep():
 		pos_sum += Vector2(s.translation.x, s.translation.z)
-	print('num sheep: ', len(get_other_sheep()))
 	return pos_sum / len(get_other_sheep())
 
 func get_dog():

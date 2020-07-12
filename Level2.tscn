@@ -25,14 +25,11 @@
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 1, 1, 1.29058 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.433096, 0.121505, 1.77616 )
 
-[sub_resource type="SphereShape" id=5]
-radius = 34.1082
-
 [sub_resource type="SphereShape" id=6]
-radius = 29.9983
+radius = 34.1082
 
 [sub_resource type="SphereShape" id=7]
 radius = 29.9983
@@ -41,6 +38,9 @@ radius = 29.9983
 radius = 29.9983
 
 [sub_resource type="SphereShape" id=9]
+radius = 29.9983
+
+[sub_resource type="SphereShape" id=10]
 radius = 29.9983
 
 [node name="Level" type="Spatial"]
@@ -151,7 +151,7 @@ shape = SubResource( 4 )
 
 [node name="CollisionShape27" type="CollisionShape" parent="Walls"]
 transform = Transform( -29.1232, 19.0299, -0.51817, -7.12047, -77.8334, -0.12669, -1.06687, 4.30257e-07, 14.9905, -165.672, 3.42517, 121.642 )
-shape = SubResource( 10 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape26" type="CollisionShape" parent="Walls"]
 transform = Transform( -9.99368, 1.2091e-05, -0.426746, -1.50996e-06, -80.126, 1.83655e-13, -0.355622, 4.30257e-07, 11.9924, -148.772, 0, 124.782 )
@@ -167,59 +167,59 @@ shape = SubResource( 4 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 3.85368, 37.6508, 63.925 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape7" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 38.3185, 39.9391, 91.8224 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape8" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 76.5294, 39.9391, 114.541 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="CollisionShape9" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 114.096, 37.5514, 127.492 )
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="CollisionShape10" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 144.295, 37.5514, 116.29 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape11" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 180.887, 37.5514, 97.106 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape12" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 210.294, 37.5514, 94.4161 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape13" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 186.297, 46.1796, -28.1225 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape14" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 158.951, 52.8518, -25.6439 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape15" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 128.377, 52.8518, -11.4663 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape16" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 98.4466, 52.8518, -2.0914 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape17" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 56.8948, 56.8452, 6.80774 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape18" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 44.8359, 56.8452, 7.11991 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="CollisionShape19" type="CollisionShape" parent="Walls"]
 transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 23.7653, 56.8452, 29.3575 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="Detail" type="Spatial" parent="."]
 
@@ -281,7 +281,7 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -146.665, 9.74168, -27.7939 )
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -62.2697, 21.2192, -27.7939 )
 
 [node name="Stone01" parent="Detail" instance=ExtResource( 13 )]
-transform = Transform( 2.76375, 0, 9.6105, 0, 10, 0, -9.6105, 0, 2.76375, -55.9836, 10.4905, 218.934 )
+transform = Transform( 2.76375, 0, 9.6105, 0, 10, 0, -9.6105, 0, 2.76375, -55.9836, 9.63659, 226.399 )
 
 [node name="Stone02" parent="Detail" instance=ExtResource( 12 )]
 transform = Transform( 15, 0, 0, 0, 15, 0, 0, 0, 15, -199.267, 4.2735, 228.286 )
