@@ -41,6 +41,8 @@ var random_walk_frame_counter = 0
 var group_up_frame_counter = 0
 var in_finish = false
 var wolf_hold_pos = null
+var alive = true
+var remove_counter = 10
 # var panic = 0
 
 func _ready():
@@ -69,8 +71,19 @@ func _on_action():
 	if randf() < group_probability:
 		group_up_frame_counter = GROUP_UP_DURATION
 
+func die():
+	alive = false
+
 func get_2d_position():
 	return Vector2(self.translation.x, self.translation.z)
+
+func remove_dead_sheep():
+	var index = 0
+	while index < len(other_sheep):
+		if not other_sheep[index].alive:
+			other_sheep.remove(index)
+		else:
+			index += 1
 
 func get_other_sheep():
 	if other_sheep:
@@ -78,6 +91,7 @@ func get_other_sheep():
 	for s in main.sheep:
 		if not s == self:
 			other_sheep.append(s)
+
 	return other_sheep
 
 func get_sheep_center():
@@ -89,7 +103,7 @@ func get_sheep_center():
 func get_dog():
 	return main.get_node("Dog")
 
-func flee(maybe_dog):
+func flee(maybe_dog, limit=1000):
 	var dog = maybe_dog
 	if dog.translation.distance_to(self.translation) < DOG_REACTION_DISTANCE:
 		var pos = Vector2(dog.translation.x, dog.translation.z)
@@ -98,7 +112,8 @@ func flee(maybe_dog):
 		var desired_velocity = diff * 100 / (diff.length() + 0.3)
 		var steering = desired_velocity - velocity
 		steering = steering.clamped(MAX_DOG_FORCE*influence)
-		velocity = (velocity + steering).clamped(max_velocity)
+		steering = steering.clamped(limit)
+		velocity = (velocity + steering).clamped(min(max_velocity, limit))
 
 func chaise(dog):
 	if dog.translation.distance_to(self.translation) < DOG_REACTION_DISTANCE:
@@ -224,6 +239,8 @@ func hold_by_wolf():
 	velocity = (velocity + steering).clamped(max_velocity)
 
 func _physics_process(delta):
+	remove_dead_sheep()
+
 	if state == "NORMAL":
 		flee(get_dog())
 		var eating_hay = false
@@ -237,6 +254,8 @@ func _physics_process(delta):
 			random_walk()
 			group_up()
 			avoid_obstacles()
+		for wolf in get_tree().get_nodes_in_group("wolf"):
+			flee(wolf, 14)
 		do_enter()
 	elif state == "PULLED":
 		hold_by_wolf()
@@ -257,4 +276,8 @@ func _physics_process(delta):
 			if col and col.collider.is_in_group("sheep") and max_velocity > 20:
 				col.collider.push_away(Vector2(col.normal.x, col.normal.z) * -PUSH_FORCE)
 	var _s = move_and_collide(Vector3(0, -100, 0))
-	
+
+	if not alive:
+		remove_counter -= 1
+		if remove_counter == 0:
+			queue_free()
