@@ -37,15 +37,16 @@ var in_finish = false
 
 func _ready():
 	randomize()
+	var r = randf() * .8 + .7
+	$"SheepModel".transform = $"SheepModel".transform.translated(Vector3(0, (1 - r) * -.7 -.7, 0))
+	$"SheepModel".transform = $"SheepModel".transform.scaled(Vector3(r, r, r))
+	
 	add_to_group("sheep")
 	main = get_node("/root/Main")
 	move_animation = $"MoveAnimation"
 	move_animation.set_objects($"SheepModel", self)
 	$ActionTimer.wait_time = randf()*2.0
 	var _c = $ActionTimer.connect("timeout", self, "_on_action")
-	var r = randf() * .8 + .7
-	var c = randf() * .5 + .5
-	$"SheepModel".transform = $"SheepModel".transform.scaled(Vector3(r, r, r))
 
 func init(target_position, entry_position):
 	target_point = target_position
