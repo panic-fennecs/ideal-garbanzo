@@ -13,6 +13,11 @@ func manage_fence_collision(col_direction: Vector3):
 func _physics_process(delta):
 	if rot_vel < 0 and rotation.y < -PI/2.0:
 		rotate(Vector3.UP, rot_vel * delta)
+		rot_vel = max(min(0, rot_vel + 0.1), -MAX_VEL)
 	elif rot_vel > 0 and rotation.y < -PI/1.9:
 		rotate(Vector3.UP, rot_vel * delta)
-	rot_vel = min(max(0, rot_vel - 0.2), MAX_VEL)
+		rot_vel = min(max(0, rot_vel - 0.1), MAX_VEL)
+	
+	if abs(rotation.y) > PI - 0.2:
+		$"/root/Main".change_level()
+	
