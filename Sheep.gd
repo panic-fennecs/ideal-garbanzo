@@ -116,9 +116,9 @@ func flee(maybe_dog, limit=1000):
 		velocity = (velocity + steering).clamped(min(max_velocity, limit))
 
 func chaise(dog):
-	if dog.translation.distance_to(self.translation) < DOG_REACTION_DISTANCE:
-		var pos = Vector2(dog.translation.x, dog.translation.z)
-		var diff = pos - get_2d_position()
+	if dog.global_transform.origin.distance_to(self.translation) < DOG_REACTION_DISTANCE:
+		var pos = Vector2(dog.global_transform.origin.x, dog.global_transform.origin.z)
+		var diff = pos - Vector2(global_transform.origin.x, global_transform.origin.z)
 		var influence = clamp(1.0/DOG_REACTION_DISTANCE*diff.length() - .5, 0, 1)
 		var desired_velocity = diff * 100 / (diff.length() + 0.3)
 		var steering = desired_velocity - velocity
