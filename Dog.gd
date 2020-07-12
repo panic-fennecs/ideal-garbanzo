@@ -10,6 +10,7 @@ func _ready():
 	move_animation.set_objects($"DogModel", self)
 	move_animation.force = move_animation.force * 2
 	move_animation.gravitation = move_animation.gravitation * 4
+	move_animation.power_influence = 0
 
 func move(delta):
 	var pos = transform.origin
