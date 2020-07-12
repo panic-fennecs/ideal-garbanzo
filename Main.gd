@@ -17,3 +17,10 @@ func _ready():
 	var end_pos = get_node("Level/EndZone").global_transform.origin
 	var end_entry_pos = end_pos + get_node("Level/EndZone/Entry").transform.origin
 	get_node("Level/StartZone").init_sheep(Vector2(end_pos.x, end_pos.z), Vector2(end_entry_pos.x, end_entry_pos.z))
+
+func get_num_finished_sheep():
+	var n = 0
+	for s in sheep:
+		if s.in_finish:
+			n += 1
+	return n
