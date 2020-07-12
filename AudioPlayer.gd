@@ -1,7 +1,7 @@
 extends Spatial
 
 const MIN_VOLUME_LEVEL = -45
-const MAX_VOLUME_LEVEL = -12
+const MAX_VOLUME_LEVEL = 0
 const FADE_SPEED = 5
 
 const BACKGROUND_STREAMS = [
@@ -15,6 +15,7 @@ const BACKGROUND_STREAMS = [
 var _current_music_player = null
 var _fading_music_players = []
 var _sample_players = []
+var tmp_time
 
 var _current_level = 0
 var critical_level = 0
@@ -54,6 +55,7 @@ func play_sample(sample, volume_db=0.0):
 	player.play()
 
 func _ready():
+	tmp_time = OS.get_system_time_msecs()
 	var _c = $MusicRefreshTimer.connect("timeout", self, "_refresh_music")
 	_c = $ChangePartTimer.connect("timeout", self, "_change_music")
 	_c = $RestartTimer.connect("timeout", self, "_restart_music")
@@ -78,6 +80,9 @@ func reset():
 	$ChangePartTimer.start()
 
 func _refresh_music():
+	print('time diff: ', OS.get_system_time_msecs() - tmp_time)
+	$MusicRefreshTimer.wait_time = 16
+	$MusicRefreshTimer.start()
 	if _current_music_player != null:
 		_current_music_player.refresh()
 	for player in _fading_music_players:
@@ -126,3 +131,5 @@ func _process(delta):
 			remove_child(player)
 			_sample_players.erase(player)
 			break
+
+	print($MusicRefreshTimer.time_left)
