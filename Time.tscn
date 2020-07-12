@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ToyBox.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Time.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 1 )
+
+[node name="Time" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="ElapsedTimeLabel" type="Label" parent="."]
+margin_left = 50.0
+margin_top = 60.0
+margin_right = 250.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 3 )
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FpsLabel" type="Label" parent="."]
+margin_left = 50.0
+margin_top = 30.0
+margin_right = 250.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 4 )
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
