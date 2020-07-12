@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://leaves.material" type="Material" id=1]
 [ext_resource path="res://trunk.material" type="Material" id=2]
+[ext_resource path="res://Obstacle.gd" type="Script" id=3]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube"
@@ -36,7 +37,10 @@ surfaces/0 = {
 [sub_resource type="CapsuleShape" id=3]
 radius = 0.510753
 
-[node name="Tree01" type="StaticBody"]
+[node name="Tree01" type="StaticBody" groups=[
+"obstacle",
+]]
+script = ExtResource( 3 )
 
 [node name="Cube" type="MeshInstance" parent="."]
 transform = Transform( 0.990272, -0.0578406, -0.126551, -1.86265e-09, 0.909506, -0.415692, 0.139143, 0.411648, 0.900658, 0, 0, 0 )

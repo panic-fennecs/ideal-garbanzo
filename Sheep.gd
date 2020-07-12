@@ -21,6 +21,9 @@ const ENTRY_FINISHED_DISTANCE = 4.0
 const ENTRY_FORCE = 0.3
 const DEFAULT_MAX_VELOCITY: float = 20.0
 
+const AVOIDANCE_LOOK_AHEADS = [2.0, 4.0, 8.0]
+const AVOIDANCE_FORCE = 0.2
+
 var max_velocity = DEFAULT_MAX_VELOCITY
 const DRAG = 0.05
 const EPSILON = 0.0001
@@ -157,6 +160,48 @@ func push_away(force: Vector2):
 	velocity += force
 	max_velocity = 25
 
+func avoid_obstacles():
+	var most_threatening = [null, null]
+	for obstacle in get_tree().get_nodes_in_group("obstacle"):
+		var col_index = collides_with_obstacle(obstacle)
+		if col_index != null:
+			if most_threatening[1] == null || most_threatening[1] > col_index:
+				most_threatening = [obstacle, col_index]
+
+	if most_threatening[0] != null:
+		avoid_obstacle(most_threatening[0])
+
+func collides_with_obstacle(obstacle):
+	var position = get_2d_position()
+	var obstacle_position = Vector2(obstacle.global_transform.origin.x, obstacle.global_transform.origin.z)
+	var radius = obstacle.get_radius()
+	var aheads = []
+	for r in AVOIDANCE_LOOK_AHEADS:
+		aheads.append(position + velocity.normalized() * r)
+	var index = 0
+	var nearest_index = 100
+	for ahead in aheads:
+		if ahead.distance_squared_to(obstacle_position) < radius*radius:
+			nearest_index = min(nearest_index, index)
+		index += 1
+
+	if nearest_index == 100:
+		nearest_index = null
+	return nearest_index
+
+func avoid_obstacle(obstacle):
+	var obstacle_position = Vector2(obstacle.global_transform.origin.x, obstacle.global_transform.origin.z)
+	var radius = obstacle.get_radius()
+	var position = get_2d_position()
+	var aheads = []
+	for r in AVOIDANCE_LOOK_AHEADS:
+		aheads.append(position + velocity.normalized() * r)
+	for ahead in aheads:
+		if ahead.distance_squared_to(obstacle_position) < radius*radius:
+			var avoidance_force = (ahead - obstacle_position).normalized() * AVOIDANCE_FORCE
+			velocity = (velocity + avoidance_force).clamped(max_velocity)
+			break
+
 func _physics_process(delta):
 	flee_dog()
 
@@ -165,6 +210,8 @@ func _physics_process(delta):
 	random_walk()
 
 	group_up()
+
+	avoid_obstacles()
 
 	do_enter()
 
