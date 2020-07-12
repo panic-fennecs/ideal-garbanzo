@@ -1,7 +1,4 @@
-- obstacle avoidance
-- level collision shapes groesser machen
 - level complete -> next level
-- remove sheep counter from start zone
 - vogel scheuche. muss weg getragen werden / hingestellt werden
 - heuballen
 
