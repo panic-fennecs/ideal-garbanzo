@@ -1,7 +1,7 @@
 extends Spatial
 
 const MIN_VOLUME_LEVEL = -45
-const MAX_VOLUME_LEVEL = -12
+const MAX_VOLUME_LEVEL = 0
 const FADE_SPEED = 5
 
 const BACKGROUND_STREAMS = [
@@ -78,6 +78,8 @@ func reset():
 	$ChangePartTimer.start()
 
 func _refresh_music():
+	$MusicRefreshTimer.wait_time = 16
+	$MusicRefreshTimer.start()
 	if _current_music_player != null:
 		_current_music_player.refresh()
 	for player in _fading_music_players:

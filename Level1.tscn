@@ -31,7 +31,7 @@ extents = Vector3( 0.13785, 0.1, 0.1 )
 extents = Vector3( 0.224207, 0.1, 0.180828 )
 
 [node name="Level" type="Spatial"]
-transform = Transform( 200, 0, 0, 0, 200, 0, 0, 0, 200, -110, -7.52779, -150 )
+transform = Transform( 200, 0, 0, 0, 200, 0, 0, 0, 200, 0, 0, 0 )
 script = ExtResource( 13 )
 
 [node name="Ground" type="StaticBody" parent="."]
@@ -214,6 +214,9 @@ shape = SubResource( 5 )
 
 [node name="Hay" parent="." instance=ExtResource( 14 )]
 transform = Transform( 0.00353553, 0, 0.00353553, 0, 0.005, 0, -0.00353553, 0, 0.00353553, 0.225753, 0.0529719, 0.525731 )
+
+[node name="SheepContainer" type="Spatial" parent="."]
+transform = Transform( 0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 0, 0, 0 )
 [connection signal="input_event" from="Ground" to="Ground" method="_on_Ground_input_event"]
 [connection signal="body_entered" from="AchievementArea" to="AchievementArea" method="_on_AchievementArea_body_entered"]
 [connection signal="body_entered" from="TipArea" to="TipArea" method="_on_TipArea_body_entered"]

@@ -48,12 +48,11 @@ func _on_LevelChangeTimer_timeout():
 		1:
 			new_level = Level2.instance()
 	
-
 	add_child(new_level)
-	var end_pos = new_level.get_node("EndZone").global_transform.origin
-	var end_entry_pos = new_level.get_node("EndZone/Entry").global_transform.origin
-	new_level.get_node("StartZone").init_sheep(Vector2(end_pos.x, end_pos.z), Vector2(end_entry_pos.x, end_entry_pos.z), new_level)
-	$Dog.global_transform.origin = new_level.get_node("Spawn").global_transform.origin
-	$Camera.global_transform.origin = new_level.get_node("Spawn").global_transform.origin
+	var end_pos = get_node("Level/EndZone").global_transform.origin
+	var end_entry_pos = get_node("Level/EndZone/Entry").global_transform.origin
+	get_node("Level/StartZone").init_sheep(Vector2(end_pos.x, end_pos.z), Vector2(end_entry_pos.x, end_entry_pos.z), get_node("Level/StartZone").global_transform.origin, get_node("Level/SheepContainer"))
+	$Dog.global_transform.origin = get_node("Level/Spawn").global_transform.origin
+	$Camera.global_transform.origin = $Dog.global_transform.origin
 	
 	level += 1

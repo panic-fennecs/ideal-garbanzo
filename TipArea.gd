@@ -6,7 +6,6 @@ onready var Achievement = preload("res://Achievement.tscn")
 var entered_sheep = []
 
 func _on_TipArea_body_entered(body):
-	print("entered")
 	if body.is_in_group("dog") and not already_shown:
 		var achievement = Achievement.instance()
 		$"/root/Main".add_child(achievement)
