@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Ground.gd" type="Script" id=1]
 [ext_resource path="res://Terrain2Model.tscn" type="PackedScene" id=2]
@@ -7,6 +7,23 @@
 [ext_resource path="res://Hay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Level2.gd" type="Script" id=6]
 [ext_resource path="res://Wolf.tscn" type="PackedScene" id=7]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="SphereShape" id=2]
+radius = 34.1082
+
+[sub_resource type="SphereShape" id=3]
+radius = 29.9983
+
+[sub_resource type="SphereShape" id=4]
+radius = 29.9983
+
+[sub_resource type="SphereShape" id=5]
+radius = 29.9983
+
+[sub_resource type="SphereShape" id=6]
+radius = 29.9983
 
 [node name="Level" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.41757, 0 )
@@ -31,4 +48,84 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108.833, 24.2546, 190.891 )
 
 [node name="Wolf" parent="." instance=ExtResource( 7 )]
 transform = Transform( -0.884035, 0, -0.467421, 0, 1, 0, 0.467421, 0, -0.884035, 81.0008, 22.1881, 185.304 )
+
+[node name="Walls" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.852966, 0, 1.05518 )
+input_ray_pickable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="Walls"]
+transform = Transform( 305.074, 0, 0, 0, -80.1257, 0, 0, 0, 12.2725, 0, 0, 248.993 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Walls"]
+transform = Transform( 305.074, 0, 0, 0, -80.1257, 0, 0, 0, 12.2725, 0, 0, -249.825 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="Walls"]
+transform = Transform( -34.5359, 0, 0, 0, -80.1257, 0, 0, 0, 12.2725, -47.2896, 0, -234.013 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Walls"]
+transform = Transform( 4.97029e-05, 0, 12.2725, 0, -80.1257, 0, -305.074, 0, 1.99945e-06, 217.256, 0, -14.4158 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Walls"]
+transform = Transform( 4.97029e-05, 0, 12.2725, 0, -80.1257, 0, -305.074, 0, 1.99945e-06, -247.258, 0, -14.4158 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 3.85368, 37.6508, 63.925 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 38.3185, 39.9391, 91.8224 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 76.5294, 39.9391, 114.541 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape9" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 114.096, 37.5514, 127.492 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape10" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 144.295, 37.5514, 116.29 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape11" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 180.887, 37.5514, 97.106 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape12" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 210.294, 37.5514, 94.4161 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape13" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 186.297, 46.1796, -28.1225 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape14" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 158.951, 52.8518, -25.6439 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape15" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 128.377, 52.8518, -11.4663 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape16" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 98.4466, 52.8518, -2.0914 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape17" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 56.8948, 56.8452, 6.80774 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape18" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 44.8359, 56.8452, 7.11991 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape19" type="CollisionShape" parent="Walls"]
+transform = Transform( -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 23.7653, 56.8452, 29.3575 )
+shape = SubResource( 6 )
 [connection signal="input_event" from="Ground" to="Ground" method="_on_Ground_input_event"]

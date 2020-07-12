@@ -11,6 +11,6 @@ func _on_AchievementArea_body_entered(body):
 			if entered_sheep.size() > 10:
 				var achievement = Achievement.instance()
 				$"/root/Main".add_child(achievement)
-				achievement.show_achievement("achievement unlocked", "cross the river")
+				achievement.show_achievement("achievement unlocked", "cross the river", Color(105/255, 147/255, 202/255, 1.0))
+				print("ay")
 				queue_free()
-	

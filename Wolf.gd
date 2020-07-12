@@ -6,10 +6,12 @@ const DRAG = 0.03
 
 const REACTION_DISTANCE = 50
 const RUN_TO_TARGET_FORCE = 0.8
+const DOG_REACTION_DISTANCE = 20
 const PULL_SHEEP_FORCE = 0.3
 const SHEEP_PULL_DISTANCE = 1.5
 
 var move_animation = null
+var dog = null
 var state = "IDLE"
 var velocity: Vector2 = Vector2()
 var home_position: Vector2
@@ -21,6 +23,7 @@ func _ready():
 	move_animation = $"MoveAnimation"
 	move_animation.set_objects($"WolfModel", self)
 	max_velocity = MAX_VELOCITY
+	dog = $"/root/Main".get_node("Dog")
 
 func get_2d_position():
 	return Vector2(translation.x, translation.z)
@@ -39,31 +42,67 @@ func run_to_target():
 	var steering = (desired_velocity - velocity).clamped(RUN_TO_TARGET_FORCE)
 	velocity = (velocity + steering).clamped(max_velocity)
 
+	var dog_position = Vector2(dog.translation.x, dog.translation.z)
+	var pos = get_2d_position()
+	if dog_position.distance_squared_to(pos) < DOG_REACTION_DISTANCE*DOG_REACTION_DISTANCE:
+		target_sheep = null
+		state = "BACK"
+		max_velocity = MAX_VELOCITY
+
 func handle_sheep_collision(sheep):
 	if state == "RUN":
 		target_sheep = sheep
 		state = "PULL_SHEEP"
 		target_sheep.state = "PULLED"
+		$AttackLabel/CanvasLayer/Sprite.visible = true
 		max_velocity = MAX_PULL_VELOCITY
 
 		var pos = get_2d_position() - velocity.normalized()*4
 		target_sheep.wolf_hold_pos = pos
 
 func pull_sheep():
-	var desired_velocity = (home_position - get_2d_position()).clamped(max_velocity)
+	var pos = get_2d_position()
+
+	var desired_velocity = (home_position - pos).clamped(max_velocity)
 	var steering = (desired_velocity - velocity).clamped(PULL_SHEEP_FORCE)
 	velocity = (velocity + steering).clamped(max_velocity)
 
-	var pos = get_2d_position() - velocity.normalized()*SHEEP_PULL_DISTANCE
-	target_sheep.wolf_hold_pos = pos
+	var hold_pos = get_2d_position() - velocity.normalized()*SHEEP_PULL_DISTANCE
+	target_sheep.wolf_hold_pos = hold_pos
 
-func _physics_process(delta):
+	var dog_position = Vector2(dog.translation.x, dog.translation.z)
+	if dog_position.distance_squared_to(pos) < DOG_REACTION_DISTANCE*DOG_REACTION_DISTANCE:
+		state = "BACK"
+		target_sheep.state = "NORMAL"
+		target_sheep = null
+		$AttackLabel/CanvasLayer/Sprite.visible = false
+		max_velocity = MAX_VELOCITY
+
+	if home_position.distance_squared_to(pos) < 100:
+		target_sheep.die()
+		$AttackLabel/CanvasLayer/Sprite.visible = false
+		target_sheep = null
+		state = "IDLE"
+		max_velocity = MAX_VELOCITY
+
+func run_back():
+	var pos = get_2d_position()
+	var desired_velocity = (home_position - pos).normalized() * max_velocity
+	var steering = (desired_velocity - velocity).clamped(RUN_TO_TARGET_FORCE)
+	velocity = (velocity + steering).clamped(max_velocity)
+
+	if home_position.distance_squared_to(pos) < 100:
+		state = "IDLE"
+
+func _physics_process(_delta):
 	if state == "IDLE":
 		check_for_sheep()
 	elif state == "RUN":
 		run_to_target()
 	elif state == "PULL_SHEEP":
 		pull_sheep()
+	elif state == "BACK":
+		run_back()
 
 	velocity *= 1.0 - DRAG
 	if velocity.length_squared() < 0.1:
