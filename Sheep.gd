@@ -98,6 +98,7 @@ func get_sheep_center():
 	var pos_sum = Vector2()
 	for s in get_other_sheep():
 		pos_sum += Vector2(s.translation.x, s.translation.z)
+	print('num sheep: ', len(get_other_sheep()))
 	return pos_sum / len(get_other_sheep())
 
 func get_dog():
@@ -253,7 +254,7 @@ func _physics_process(delta):
 			follow_other_sheep()
 			random_walk()
 			group_up()
-			avoid_obstacles()
+			# avoid_obstacles()
 		for wolf in get_tree().get_nodes_in_group("wolf"):
 			flee(wolf, 14)
 		do_enter()
